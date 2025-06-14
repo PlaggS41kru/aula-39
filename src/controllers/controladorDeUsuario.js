@@ -1,9 +1,8 @@
 const servicoDeUsuario = require("../services/servicoDeUsuario");
-const { HttpError } = require("../errors/HttpError");
 
 class ControladorDeUsuario {
-  pegarTodos(_req, res) {
-    const usuarios = servicoDeUsuario.buscarTodos();
+  async pegarTodos(_req, res) {
+    const usuarios = await servicoDeUsuario.buscarTodos();
 
     res.status(200).json(usuarios);
   }

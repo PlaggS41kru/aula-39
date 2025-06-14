@@ -1,28 +1,39 @@
 const { Usuario } = require("../models/Usuario");
+const { db } = require("../../prisma/main")
 
 class RepositorioDeUsuario {
-  buscarTodos() {
-    return Usuario.buscarTodos();
+  async buscarTodos() {
+    return await db.user.findMany();
   }
 
   criar(usuario) {
+    const user = user.prisma.create({
+      data:{
+        email: 'exm@gexm.com',
+        senha: '12345',
+      }
+     })
     return usuario.salvar();
   }
 
-  buscarPeloEmail(email) {
-    return Usuario.buscarPeloEmail(email);
+   async buscarPeloEmail(email) {
+    return await Usuario.buscarPeloEmail(email);
   }
 
-  buscarPeloId(id) {
+  async buscarPeloId(id) {
     return Usuario.buscarPeloId(id);
   }
 
-  atualizar(usuarioId, dadosAtualizados) {
-    return Usuario.atualizar(usuarioId, dadosAtualizados);
+   async atualizar(usuarioId, dadosAtualizados) {
+    return await db.user.atualizar(usuarioId, dadosAtualizados);
   }
 
   deletarUmUsuario(id) {
-    return Usuario.deletarUmUsuario(id);
+    return db.user.deletarUmUsuario(id);({
+      where: {
+      id: usuarioId
+    },
+    })
   }
 }
 
